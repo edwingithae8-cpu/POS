@@ -1,0 +1,39 @@
+#include <graphics.h>
+#include <conio.h>
+#include <stdio.h>
+
+int main() {
+    // Declare graphics driver and mode variables
+    int gd = DETECT, gm;
+
+    // Initialize the graphics system and open a graphics window
+    // (Note: Requires a BGI-compatible environment like Turbo C++ or WinBGIm)
+    initgraph(&gd, &gm, "");
+
+    // Check for initialization errors
+    int errorCode = graphresult();
+    if (errorCode != grOk) {
+        printf("Graphics error: %s\n", grapherrormsg(errorCode));
+        printf("Press any key to halt:");
+        getch();
+        return 1;
+    }
+
+    // Use putpixel to plot individual pixels from start to end
+    // Here we draw a diagonal red line and a horizontal green line pixel by pixel
+    for (int i = 50; i < 300; i++) {
+        putpixel(i, i, RED);       // Plots a red pixel at coordinate (i, i)
+        putpixel(i, 200, GREEN);   // Plots a green pixel at coordinate (i, 200)
+    }
+
+    // Display a message on screen using graphics text
+    outtextxy(50, 50, "Press any key to exit...");
+
+    // Pause execution so the window stays open until a key is pressed
+    getch();
+
+    // Deallocate memory and close the graphics mode
+    closegraph();
+    
+    return 0;
+}
